@@ -1,24 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, TableSortLabel } from '@material-ui/core';
 import styled from '@emotion/styled';
+import { sortByDate, formatToDate } from '../../utils';
 
 const HeaderTypography = styled(Typography) `
   font-weight: 700;
 `
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+const UserTable = ({data = [], tableName}) => {
+  const [sortOrder, setSortOrder] =  useState('asc');
+  const [sortedData, setSortedData] = useState(sortByDate(data, sortOrder));
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+  const sort = () => {
+    const newOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+    setSortOrder(newOrder);
 
-const UserTable = () => {
+    const sorted = sortByDate(data, sortOrder);
+    setSortedData(sorted);
+  }
+
+  useEffect(() => {
+    const sorted = sortByDate(data, sortOrder);
+    setSortedData(sorted);
+  }, [data]);
+
   return (
     <TableContainer>
     <Table>
@@ -26,14 +31,14 @@ const UserTable = () => {
         <TableRow>
           <TableCell>
             <HeaderTypography variant="subtitle2">
-              <TableSortLabel>
+              <TableSortLabel onClick={sort}>
                 Date
               </TableSortLabel>
             </HeaderTypography>
           </TableCell>
           <TableCell>
             <HeaderTypography variant="subtitle2">
-              User ID
+              {tableName} ID
             </HeaderTypography>
           </TableCell>
           <TableCell>
@@ -49,15 +54,16 @@ const UserTable = () => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {rows.map((row) => (
-          <TableRow key={row.name}>
-            <TableCell>{row.calories}</TableCell>
-            <TableCell>{row.fat}</TableCell>
-            <TableCell >{row.carbs}</TableCell>
-            <TableCell>{row.protein}</TableCell>
+        { //TODO: separate row into a component
+        sortedData.filter(row => row.diff && row.diff.length > 0).map((row) => ( 
+          <TableRow key={row.id}>
+            <TableCell>{formatToDate(row.timestamp)}</TableCell>
+            <TableCell>{row.id}</TableCell>
+            <TableCell >{row.diff[0].oldValue}</TableCell>
+            <TableCell>{row.diff[0].newValue}</TableCell>
           </TableRow>
         ))}
-        </TableBody>
+      </TableBody>
     </Table>
   </TableContainer>
   );
