@@ -12,21 +12,28 @@ const FooterTypography = styled(Typography)`
   padding: 15px;
 `
 
-const TableFooter = () =>{
+const TableFooter = ({loading, error}) =>{
   return (
     <FooterBox>
       <Grid container direction="column" alignItems="center">
-        <Grid item>
-          <FooterTypography color="error">
-            We had problems fetching your data. Please try again.
-          </FooterTypography>
-        </Grid>
-        <Grid item>
-          <CircularProgress/>
-        </Grid>
-        <Grid item>
-          <Button color="primary" variant="contained">Load More</Button>
-        </Grid>
+        { error && (
+          <Grid item>
+            <FooterTypography color="error" id="error-text">
+              We had problems fetching your data. Please try again.
+            </FooterTypography>
+          </Grid>
+          )
+        }
+        { loading ? (
+          <Grid item>
+            <CircularProgress/>
+          </Grid>
+          ) : (
+          <Grid item>
+            <Button color="primary" variant="contained">{error ? "Retry" : "Load More"}</Button>
+          </Grid>
+          )
+        }
       </Grid>
     </FooterBox>
   )

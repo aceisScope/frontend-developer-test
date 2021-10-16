@@ -7,7 +7,7 @@ const TableComponent = () => {
   return (
     <Paper>
       <UserTable/>
-      <TableFooter/>
+      <TableFooter loading={false} error={true}/>
     </Paper>
   )
 }
