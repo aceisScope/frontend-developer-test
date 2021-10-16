@@ -16,7 +16,7 @@ export const App = () => {
     <Container className="app" fixed>
       <Box data-testid="app-box" m={2}>
         <Typography>Your app should show up here.</Typography>
-        <TableComponent/>
+        <TableComponent request={api.getUsersDiff} name={"Projects"}/>
         <Button variant="contained" color="primary" onClick={fetchData}>
           Test data fetch
         </Button>

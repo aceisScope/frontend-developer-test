@@ -12,7 +12,7 @@ const FooterTypography = styled(Typography)`
   padding: 15px;
 `
 
-const TableFooter = ({loading, error}) =>{
+const TableFooter = ({loading, error, fetchData}) =>{
   return (
     <FooterBox>
       <Grid container direction="column" alignItems="center">
@@ -30,7 +30,7 @@ const TableFooter = ({loading, error}) =>{
           </Grid>
           ) : (
           <Grid item>
-            <Button color="primary" variant="contained">{error ? "Retry" : "Load More"}</Button>
+            <Button color="primary" variant="contained" onClick={fetchData}>{error ? "Retry" : "Load More"}</Button>
           </Grid>
           )
         }

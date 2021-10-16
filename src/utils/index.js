@@ -6,7 +6,6 @@ const sortByDate = (data, direction) => {
 
 const formatToDate = (timestamp) => {
   let date = new Date(timestamp);
-  console.log(date, date.getMonth);
   return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 }
 

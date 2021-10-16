@@ -9,20 +9,13 @@ const HeaderTypography = styled(Typography) `
 
 const UserTable = ({data = [], tableName}) => {
   const [sortOrder, setSortOrder] =  useState('asc');
-  const [sortedData, setSortedData] = useState(sortByDate(data, sortOrder));
 
+  const sortedData = sortByDate(data, sortOrder);
+  
   const sort = () => {
     const newOrder = sortOrder === 'asc' ? 'desc' : 'asc';
     setSortOrder(newOrder);
-
-    const sorted = sortByDate(data, sortOrder);
-    setSortedData(sorted);
   }
-
-  useEffect(() => {
-    const sorted = sortByDate(data, sortOrder);
-    setSortedData(sorted);
-  }, [data]);
 
   return (
     <TableContainer>
@@ -55,7 +48,7 @@ const UserTable = ({data = [], tableName}) => {
       </TableHead>
       <TableBody>
         { //TODO: separate row into a component
-        sortedData.filter(row => row.diff && row.diff.length > 0).map((row) => ( 
+        sortedData.map((row) => ( 
           <TableRow key={row.id}>
             <TableCell>{formatToDate(row.timestamp)}</TableCell>
             <TableCell>{row.id}</TableCell>
