@@ -18,7 +18,7 @@ const TableFooter = ({loading, error, fetchData}) =>{
       <Grid container direction="column" alignItems="center">
         { error && (
           <Grid item>
-            <FooterTypography color="error" id="error-text">
+            <FooterTypography color="error" data-testid="error-text">
               We had problems fetching your data. Please try again.
             </FooterTypography>
           </Grid>
