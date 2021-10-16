@@ -5,12 +5,12 @@ import UserTable from './UserTable';
 
 const TableComponent = ({request, name}) => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
   const [data, setData] = useState([]);
 
   const fetchAPI = useCallback(async () => {
     setLoading(true);
-    setError(false);
+    setError(null);
 
     try {
       const response = await request();
@@ -18,18 +18,18 @@ const TableComponent = ({request, name}) => {
         setData(data => [...data, ...response.data]);
         setError(false);
       } else {
-        setError(true);
+        setError(response.error);
       }
     } catch (error) {
-      setError(true);
+      setError('Unknown error');
     }
 
     setLoading(false);
-  });
+  }, [request]);
 
   useEffect(() => {
     fetchAPI();
-  }, []);
+  }, [fetchAPI]);
 
   return (
     <Paper>

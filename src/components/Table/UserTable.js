@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, TableSortLabel } from '@material-ui/core';
 import styled from '@emotion/styled';
 import { sortByDate, formatToDate } from '../../utils';
@@ -8,10 +8,10 @@ const HeaderTypography = styled(Typography) `
 `
 
 const UserTable = ({data = [], tableName}) => {
-  const [sortOrder, setSortOrder] =  useState('asc');
+  const [sortOrder, setSortOrder] =  useState('desc');
 
   const sortedData = sortByDate(data, sortOrder);
-  
+
   const sort = () => {
     const newOrder = sortOrder === 'asc' ? 'desc' : 'asc';
     setSortOrder(newOrder);
