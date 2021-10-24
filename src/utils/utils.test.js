@@ -16,6 +16,6 @@ describe('sortByDate function', () => {
 describe('formatToDate function', () => {
   it('can formate timestamp to yyyy-m-d', () => {
     const mock_date = new Date('2020/2/15').getTime();
-    expect(formatToDate(mock_date)).toEqual('2020-2-15');
+    expect(formatToDate(mock_date)).toEqual('2020-02-15');
   })
 })
