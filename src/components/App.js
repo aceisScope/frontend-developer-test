@@ -12,7 +12,7 @@ export const App = () => {
         <TableComponent request={api.getUsersDiff} name={"User"}/>
       </Box>
       <Box data-testid="app-box" m={2}>
-        <TableComponent request={api.getProjectsDiff} name={"Projects"}/>
+        <TableComponent request={api.getProjectsDiff} name={"Project"}/>
       </Box>
     </Container>
   );

@@ -24,7 +24,7 @@ const UserTable = ({data = [], tableName}) => {
         <TableRow>
           <TableCell>
             <HeaderTypography variant="subtitle2">
-              <TableSortLabel onClick={sort}>
+              <TableSortLabel onClick={sort} direction={sortOrder}>
                 Date
               </TableSortLabel>
             </HeaderTypography>
